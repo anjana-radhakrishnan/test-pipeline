@@ -31,11 +31,11 @@ jobs:
           chmod 600 key.pem
       - name: Pull Docker image
         run: |
-          ssh -o StrictHostKeyChecking=no -i key.pem ubuntu@"${{ env.IP_ADDRESS }}" 'sudo docker pull anjanar17/my-image-name:latest'
+          ssh -o StrictHostKeyChecking=no -i key.pem ec2-user@"${{ env.IP_ADDRESS }}" 'sudo docker pull anjanar17/my-image-name:latest'
       - name: Stop running container
         run: |
-          ssh -o StrictHostKeyChecking=no -i key.pem ubuntu@"${{ env.IP_ADDRESS }}" 'sudo docker stop runner || true'
-          ssh -o StrictHostKeyChecking=no -i key.pem ubuntu@"${{ env.IP_ADDRESS }}" 'sudo docker rm runner || true'
+          ssh -o StrictHostKeyChecking=no -i key.pem ec2-user@"${{ env.IP_ADDRESS }}" 'sudo docker stop runner || true'
+          ssh -o StrictHostKeyChecking=no -i key.pem ec2-user@"${{ env.IP_ADDRESS }}" 'sudo docker rm runner || true'
       - name: Run new container
         run: |
-          ssh -o StrictHostKeyChecking=no -i key.pem ubuntu@"${{ env.IP_ADDRESS }}" 'sudo docker run -d --name runner anjanar17/my-image-name:latest'
+          ssh -o StrictHostKeyChecking=no -i key.pem ec2-user@"${{ env.IP_ADDRESS }}" 'sudo docker run -d --name runner anjanar17/my-image-name:latest'
