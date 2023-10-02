@@ -31,7 +31,7 @@ jobs:
           chmod 600 key.pem
       - name: Pull Docker image
         run: |
-          ssh -o StrictHostKeyChecking=no -i key.pem ec2-user@"${{ env.IP_ADDRESS }}" 'sudo docker rmi -f $(docker images -q) && sudo docker pull anjanar17/my-image-name:latest'
+          ssh -o StrictHostKeyChecking=no -i key.pem ec2-user@"${{ env.IP_ADDRESS }}" 'sudo docker pull anjanar17/my-image-name:latest'
       - name: Stop running container
         run: |
           ssh -o StrictHostKeyChecking=no -i key.pem ec2-user@"${{ env.IP_ADDRESS }}" 'sudo docker stop runner || true'
