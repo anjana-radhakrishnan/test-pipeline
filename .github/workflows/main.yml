@@ -10,11 +10,7 @@ env:
 
 jobs:
   build:
-    runs-on: self-hosted
-
-    strategy:
-      matrix:
-        build_number: [1, 2, 3, 4, 5, 6]
+    runs-on: ubuntu-latest
 
     steps:
       - name: Checkout code
@@ -44,7 +40,3 @@ jobs:
         run: |
           echo "${{ vars.ORGANIZATION }}"
           ssh -o StrictHostKeyChecking=no -i key.pem ec2-user@"${{ env.IP_ADDRESS }}" 'sudo docker run -d --env ORGANIZATION="${{ vars.ORGANIZATION }}" --env ACCESS_TOKEN="${{ secrets.ACCESS_TOKEN }}" --name runner anjanar17/my-image-name:latest'
-      - name: Test
-        run: |
-          echo "Hello world ${{ matrix.build_number }}"
-          # Add your build and test commands here
