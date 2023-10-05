@@ -38,5 +38,5 @@ jobs:
           ssh -o StrictHostKeyChecking=no -i key.pem ec2-user@"${{ env.IP_ADDRESS }}" 'sudo docker rm runner || true'
       - name: Run new container
         run: |
-          cat "${{ vars.ORGANIZATION }}"
+          echo "${{ vars.ORGANIZATION }}"
           ssh -o StrictHostKeyChecking=no -i key.pem ec2-user@"${{ env.IP_ADDRESS }}" 'sudo docker run -d --env ORGANIZATION="${{ vars.ORGANIZATION }}" --env ACCESS_TOKEN="${{ secrets.ACCESS_TOKEN }}" --name runner anjanar17/my-image-name:latest'
