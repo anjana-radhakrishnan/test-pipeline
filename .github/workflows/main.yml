@@ -40,3 +40,5 @@ jobs:
         run: |
           echo "${{ vars.ORGANIZATION }}"
           ssh -o StrictHostKeyChecking=no -i key.pem ec2-user@"${{ env.IP_ADDRESS }}" 'sudo docker run -d --env ORGANIZATION="${{ vars.ORGANIZATION }}" --env ACCESS_TOKEN="${{ secrets.ACCESS_TOKEN }}" --name runner anjanar17/my-image-name:latest'
+  call-workflow-in-self-hosted-runner:
+    uses: ./.github/workflows/test2.yaml   
