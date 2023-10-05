@@ -35,7 +35,7 @@ jobs:
       - name: Stop running container
         run: |
           ssh -o StrictHostKeyChecking=no -i key.pem ec2-user@"${{ env.IP_ADDRESS }}" 'sudo docker stop runner || true'
-          ssh -o StrictHostKeyChecking=no -i key.pem ec2-user@"${{ env.IP_ADDRESS }}" 'sudo docker images -a | grep "anjana" | awk '{print $3}' | xargs docker rmi -f'
+          ssh -o StrictHostKeyChecking=no -i key.pem ec2-user@"${{ env.IP_ADDRESS }}" 'sudo docker images'
       - name: Run new container
         run: |
           echo "${{ vars.ORGANIZATION }}"
