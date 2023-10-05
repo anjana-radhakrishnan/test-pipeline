@@ -1,0 +1,24 @@
+name: Reusable workflow with metrix
+on:
+  workflow_call:
+
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        build_number: [1, 2, 3]
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: 14
+
+      - name: Build and Test
+        run: |
+          echo "Hello world from ${{ matrix.build_number }}"
+          # Add your build and test commands here
