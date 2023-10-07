@@ -7,16 +7,21 @@ env:
   AWS_PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
 
 jobs:
-  runner_provision:
+  key_set_up:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        labels: [1, 2, 3]
     steps:
       - name: Set permissions for private key
         run: |
           echo "${{ env.AWS_PRIVATE_KEY }}" > key.pem
           chmod 600 key.pem
+          
+  runner_provision:
+    needs: key_set_up
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        labels: [1, 2, 3]
+    steps:
       - name: Run new container
         run: |
           echo "${{ vars.ORGANIZATION }}"
