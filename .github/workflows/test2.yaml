@@ -24,7 +24,7 @@ jobs:
       - name: Run new container
         run: |
           echo "${{ vars.ORGANIZATION }}"
-          ssh -o StrictHostKeyChecking=no -i key.pem ec2-user@"${{ secrets.IP_ADDRESS }}" 'sudo docker run -d --env ORGANIZATION="${{ vars.ORGANIZATION }}" --env ACCESS_TOKEN="${{ secrets.ACCESS_TOKEN }}" --env="${{ matrix.labels }}" --name runner-"${{ matrix.labels }}" anjanar17/my-image-name:latest'
+          ssh -o StrictHostKeyChecking=no -i key.pem ec2-user@"${{ secrets.IP_ADDRESS }}" 'sudo docker run -d --env ORGANIZATION="${{ vars.ORGANIZATION }}" --env ACCESS_TOKEN="${{ secrets.ACCESS_TOKEN }}" --env LABEL="${{ matrix.labels }}" --name runner-"${{ matrix.labels }}" anjanar17/my-image-name:latest'
 
   build:
     needs: runner_provision
