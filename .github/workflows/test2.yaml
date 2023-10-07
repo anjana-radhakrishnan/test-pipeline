@@ -6,22 +6,18 @@ env:
   IP_ADDRESS: ${{ secrets.IP_ADDRESS }}
   AWS_PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
 
-jobs:
-  key_set_up:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Set permissions for private key
-        run: |
-          echo "${{ env.AWS_PRIVATE_KEY }}" > key.pem
-          chmod 600 key.pem
-          
+jobs:     
   runner_provision:
-    needs: key_set_up
     runs-on: ubuntu-latest
     strategy:
       matrix:
         labels: [1, 2, 3]
     steps:
+      - name: Set permissions for private key
+        run: |
+          echo "${{ env.AWS_PRIVATE_KEY }}" > key.pem
+          chmod 600 key.pem
+          sleep 5
       - name: Run new container
         run: |
           echo "${{ vars.ORGANIZATION }}"
