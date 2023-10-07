@@ -22,6 +22,16 @@ jobs:
       - name: Build Docker image
         run: docker build -t anjanar17/my-image-name:latest .
 
+      - name: Set permissions for private key
+        run: |
+          echo "${{ env.AWS_PRIVATE_KEY }}" > key.pem
+          chmod 600 key.pem
+          
+      - name: Stop running container
+        run: |
+          ssh -o StrictHostKeyChecking=no -i key.pem ec2-user@"${{ env.IP_ADDRESS }}" 'sudo docker stop runner || true'
+          ssh -o StrictHostKeyChecking=no -i key.pem ec2-user@"${{ env.IP_ADDRESS }}" 'sudo docker rm runner || true'
+
   call-workflow-in-self-hosted-runner:
     needs: build
     uses: ./.github/workflows/test2.yaml   
