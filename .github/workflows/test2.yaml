@@ -1,10 +1,13 @@
 name: Reusable workflow with metrix
 on:
   workflow_call:
-
-env:
-  PUBLIC_IP_ADDRESS: ${{ secrets.IP_ADDRESS }}
-  AWS_PRIVATE_PEM_KEY: ${{ secrets.PRIVATE_KEY }}
+    secrets:
+      IP_ADDRESS:
+        required: true
+      PRIVATE_KEY:
+        required: true
+      ACCESS_TOKEN:
+        required: true
 
 jobs:     
   runner_provision:
