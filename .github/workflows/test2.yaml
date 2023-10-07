@@ -28,11 +28,10 @@ jobs:
 
   build:
     needs: runner_provision
-    runs-on: ${{ matrix.labels }}
     strategy:
       matrix:
         build_number: [1, 2, 3]
-
+    runs-on: ${{ matrix.build_number }}
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v2
