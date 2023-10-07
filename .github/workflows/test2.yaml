@@ -2,6 +2,10 @@ name: Reusable workflow with metrix
 on:
   workflow_call:
 
+env:
+  IP_ADDRESS: ${{ secrets.IP_ADDRESS }}
+  AWS_PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
+
 jobs:
   runner_provision:
     runs-on: ubuntu-latest
