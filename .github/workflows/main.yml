@@ -37,6 +37,9 @@ jobs:
 
   call-workflow-in-self-hosted-runner:
     needs: build
+    with:
+      PUBLIC_IP_ADDRESS: ${{ needs.print.outputs.IP_ADDRESS }}
+      AWS_PRIVATE_PEM_KEY: ${{ needs.print.outputs.AWS_PRIVATE_KEY }}
     uses: ./.github/workflows/test2.yaml   
 
   # removing-docker-runner:
