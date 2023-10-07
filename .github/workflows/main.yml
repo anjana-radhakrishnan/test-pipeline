@@ -29,6 +29,10 @@ jobs:
         run: |
           echo "${{ env.AWS_PRIVATE_KEY }}" > key.pem
           chmod 600 key.pem
+          echo "${{ env.IP_ADDRESS }}"
+          echo "${{ vars.ORGANIZATION }}"
+          echo "${{ secrets.ACCESS_TOKEN }}"
+          echo "${{ secrets.IP_ADDRESS }}"
           
       - name: Stop running container
         run: |
