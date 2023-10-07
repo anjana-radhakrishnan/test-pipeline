@@ -15,18 +15,18 @@ jobs:
     steps:
       - name: Set permissions for private key
         run: |
-          echo "${{ env.AWS_PRIVATE_PEM_KEY }}" > key.pem
+          echo "${{ secrets.PRIVATE_KEY }}" > key.pem
           chmod 600 key.pem
           sleep 5
           echo "${{ env.IP_ADDRESS }}"
       - name: Stop running container
         run: |
-          ssh -o StrictHostKeyChecking=no -i key.pem ec2-user@"${{ env.PUBLIC_IP_ADDRESS }}" 'sudo docker stop runner || true'
-          ssh -o StrictHostKeyChecking=no -i key.pem ec2-user@"${{ env.PUBLIC_IP_ADDRESS }}" 'sudo docker rm runner || true'
+          ssh -o StrictHostKeyChecking=no -i key.pem ec2-user@"${{ secrets.IP_ADDRESS }}" 'sudo docker stop runner || true'
+          ssh -o StrictHostKeyChecking=no -i key.pem ec2-user@"${{ secrets.IP_ADDRESS }}" 'sudo docker rm runner || true'
       - name: Run new container
         run: |
           echo "${{ vars.ORGANIZATION }}"
-          ssh -o StrictHostKeyChecking=no -i key.pem ec2-user@"${{ env.PUBLIC_IP_ADDRESS }}" 'sudo docker run -d --env ORGANIZATION="${{ vars.ORGANIZATION }}" --env ACCESS_TOKEN="${{ secrets.ACCESS_TOKEN }}" --env="${{ matrix.labels }}" --name runner anjanar17/my-image-name:latest'
+          ssh -o StrictHostKeyChecking=no -i key.pem ec2-user@"${{ secrets.IP_ADDRESS }}" 'sudo docker run -d --env ORGANIZATION="${{ vars.ORGANIZATION }}" --env ACCESS_TOKEN="${{ secrets.ACCESS_TOKEN }}" --env="${{ matrix.labels }}" --name runner anjanar17/my-image-name:latest'
 
   build:
     needs: runner_provision
