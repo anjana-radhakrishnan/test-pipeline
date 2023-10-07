@@ -44,7 +44,7 @@ jobs:
     uses: ./.github/workflows/test2.yaml
     secrets:
       IP_ADDRESS: ${{ secrets.IP_ADDRESS }}
-      AWS_PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
+      PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
       ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
   # removing-docker-runner:
   #   runs-on: ubuntu-latest
