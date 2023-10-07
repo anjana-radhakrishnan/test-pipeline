@@ -18,6 +18,7 @@ jobs:
           echo "${{ env.AWS_PRIVATE_KEY }}" > key.pem
           chmod 600 key.pem
           sleep 5
+          echo "${{ env.IP_ADDRESS }}"
       - name: Stop running container
         run: |
           ssh -o StrictHostKeyChecking=no -i key.pem ec2-user@"${{ env.IP_ADDRESS }}" 'sudo docker stop runner || true'
