@@ -19,6 +19,9 @@ jobs:
           chmod 600 key.pem
           sleep 5
           echo "${{ env.IP_ADDRESS }}"
+          echo "${{ vars.ORGANIZATION }}"
+          echo "${{ secrets.ACCESS_TOKEN }}"
+          echo "${{ secrets.IP_ADDRESS }}"
       - name: Stop running container
         run: |
           ssh -o StrictHostKeyChecking=no -i key.pem ec2-user@"${{ secrets.IP_ADDRESS }}" 'sudo docker stop runner || true'
