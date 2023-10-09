@@ -31,8 +31,9 @@ jobs:
 
       - name: Set permissions for private key
         run: |
-          echo "IP_ADDRESS: ${{ env.IP_ADDRESS }}" 
-          echo "AWS_PRIVATE_KEY: ${{ env.AWS_PRIVATE_KEY }}"
+          echo "${{ vars.ORGANIZATION }}"
+          echo "${{ env.IP_ADDRESS }}"
+          echo "${{ secrets.ACCESS_TOKEN }}"
           echo "${{ env.AWS_PRIVATE_KEY }}" > key.pem
           chmod 600 key.pem
 
