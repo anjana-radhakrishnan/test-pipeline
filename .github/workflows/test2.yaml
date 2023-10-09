@@ -6,13 +6,13 @@ on:
       job_count:
         description: 'Number of jobs to create containers for'
         required: true
-      secrets:
-        IP_ADDRESS:
-          required: true
-        PRIVATE_KEY:
-          required: true
-        ACCESS_TOKEN:
-          required: true
+    secrets:
+      IP_ADDRESS:
+        required: true
+      PRIVATE_KEY:
+        required: true
+      ACCESS_TOKEN:
+        required: true
 
 jobs:     
   runner_provision:
