@@ -44,12 +44,4 @@ jobs:
       - name: Build and Test
         run: |
           echo "Hello world from ${{ matrix.labels }}"
-          # Add your build and test commands here
-
-  call-test3-workflow:
-    needs: build
-    uses: ./.github/workflows/test3.yaml
-    secrets:
-      IP_ADDRESS: ${{ secrets.IP_ADDRESS }}
-      PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
-      ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}        
+          # Add your build and test commands here    
