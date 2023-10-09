@@ -1,11 +1,6 @@
-name: Reusable workflow with dynamic containers
-
+name: Reusable workflow with metrix
 on:
   workflow_call:
-    inputs:
-      job_count:
-        description: 'Number of jobs to create containers for'
-        required: true
     secrets:
       IP_ADDRESS:
         required: true
@@ -19,7 +14,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        labels: ${{ range(1, github.event.inputs.job_count + 1) }}
+        labels: [1, 2, 3]
     steps:
       - name: Set permissions for private key
         run: |
@@ -35,7 +30,7 @@ jobs:
     needs: runner_provision
     strategy:
       matrix:
-        labels: ${{ range(1, github.event.inputs.job_count + 1) }}
+        labels: [1, 2, 3]
     runs-on: ${{ matrix.labels }}
     steps:
       - name: Checkout Repository
