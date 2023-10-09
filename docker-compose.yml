@@ -1,0 +1,10 @@
+services:
+  runner:
+    build: .
+    environment:
+      - ORGANIZATION=anjana-radhakrishnan
+      - ACCESS_TOKEN=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
+
+    deploy: 
+      mode: replicated
+      replicas: 4
