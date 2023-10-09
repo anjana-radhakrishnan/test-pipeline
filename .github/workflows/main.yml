@@ -33,15 +33,13 @@ jobs:
           label="${{ matrix.labels }}"
           echo "Creating and running container with label $label"
 
+          # Create the container
           ssh -o StrictHostKeyChecking=no -i key.pem ec2-user@"${{ env.IP_ADDRESS }}" \
             "sudo docker run -d --env ORGANIZATION='${{ github.repository }}' \
             --env ACCESS_TOKEN='${{ secrets.ACCESS_TOKEN }}' \
             --env LABEL='$label' \
-            --name runner-$label \
-            -v /var/run/docker.sock:/var/run/docker.sock \  # Mount the Docker socket
-            anjanar17/my-image-name:latest"
-
+            --name runner-$label anjanar17/my-image-name:latest"
 
           # Run your specific job inside the container (adjust the command as needed)
-          ssh -o StrictHostKeyChecking=no -i key.pem ec2-user@"${{ env.IP_ADDRESS }}" \
-            "sudo docker exec runner-$label echo 'Hello from container $label'"
+          ssh -o StrictHostKeyChecking=no -i key.pem ec2-user@"${{ env.IP_ADDRESS }}" 
+            # "sudo docker exec runner-$label echo 'Hello from container $label'"
