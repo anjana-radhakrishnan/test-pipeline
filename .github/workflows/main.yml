@@ -44,7 +44,7 @@ jobs:
 
           # Create the container
           ssh -o StrictHostKeyChecking=no -i key.pem ec2-user@"${{ env.IP_ADDRESS }}" \
-            "sudo docker run -d --env ORGANIZATION="${{ github.repository }}" \
+            "sudo docker run -d --env ORGANIZATION="${{ vars.ORGANIZATION }}" \
             --env ACCESS_TOKEN="${{ secrets.ACCESS_TOKEN }}" \
             --env LABEL='$label' \
             --name runner-$label anjanar17/my-image-name:latest"
