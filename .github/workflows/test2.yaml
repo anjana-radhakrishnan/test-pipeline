@@ -30,8 +30,8 @@ jobs:
     needs: runner_provision
     strategy:
       matrix:
-        build_number: [1, 2, 3]
-    runs-on: ${{ matrix.build_number }}
+        labels: [1, 2, 3]
+    runs-on: ${{ matrix.labels }}
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v2
@@ -43,5 +43,5 @@ jobs:
 
       - name: Build and Test
         run: |
-          echo "Hello world from ${{ matrix.build_number }}"
+          echo "Hello world from ${{ matrix.labels }}"
           # Add your build and test commands here
