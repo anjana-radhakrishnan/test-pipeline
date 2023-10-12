@@ -11,7 +11,7 @@ env:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: demo
     strategy:
       matrix:
         labels: [1, 2]  # Adjust the number of labels based on the number of jobs
